@@ -1,5 +1,7 @@
 messages:
   prefix: "&6[WildOrigins] &f"
+  config-reloaded: "&a[WildOrigins] Configuration files have been reloaded!"
+  no-permission: "&cYou don't have permission to do this!"
   origin-selected: "&aYou have selected the &e%origin% &aorigin!"
   ability-activated: "&aYou have used the ability &e%ability%&a!"
   cooldown-active: "&cYou must wait %cooldown% seconds before using this again!"
