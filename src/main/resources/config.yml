@@ -1,0 +1,10 @@
+settings:
+  default-origin: human  # Default origin when resetting
+  ability-cooldown: 30  # Global cooldown for abilities (seconds)
+  use-placeholderapi: true  # Enable PlaceholderAPI support
+
+# Customizable messages
+messages:
+  no-permission: "&cYou don't have permission to do this!"
+  invalid-origin: "&cThis origin does not exist!"
+  origin-set: "&aYour origin has been set to &e%origin%&a!"

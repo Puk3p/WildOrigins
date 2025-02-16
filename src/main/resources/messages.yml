@@ -1,0 +1,6 @@
+messages:
+  prefix: "&6[WildOrigins] &f"
+  origin-selected: "&aYou have selected the &e%origin% &aorigin!"
+  ability-activated: "&aYou have used the ability &e%ability%&a!"
+  cooldown-active: "&cYou must wait %cooldown% seconds before using this again!"
+  origin-reset: "&aYour origin has been reset to Human!"

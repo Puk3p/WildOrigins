@@ -1,0 +1,38 @@
+origins:
+  frog:
+    name: "&aFrog"
+    abilities:
+      - "jump_boost"
+      - "water_breathing"
+  ravager:
+    name: "&cRavager"
+    abilities:
+      - "strength"
+      - "resistance"
+  sniffer:
+    name: "&6Sniffer"
+    abilities:
+      - "night_vision"
+      - "haste"
+  chicken:
+    name: "&eChicken"
+    abilities:
+      - "feather_falling"
+      - "slow_falling"
+  wolf:
+    name: "&fWolf"
+    abilities:
+      - "strength"
+      - "regeneration"
+  bee:
+    name: "&eBee"
+    abilities:
+      - "speed"
+      - "poison_attack"
+      - "haste"
+  cat:
+    name: "&9Cat"
+    abilities:
+      - "night_vision"
+      - "speed"
+      - "jump_boost"
