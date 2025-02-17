@@ -11,7 +11,7 @@ import java.util.logging.Level;
 public class ConfigManager {
     private final WildOrigins plugin;
     private FileConfiguration config, messages, abilities;
-    private File configFile, messageFile, abilitiesFile;
+    private File configFile, messagesFile, abilitiesFile;
 
     public ConfigManager(WildOrigins plugin) {
         this.plugin = plugin;
@@ -19,33 +19,28 @@ public class ConfigManager {
     }
 
     private void loadFiles() {
+        plugin.getLogger().info("Loading configuration files...");
         //loading each config file
         configFile = new File(plugin.getDataFolder(), "config.yml");
-        messageFile = new File(plugin.getDataFolder(), "messages.yml");
+        messagesFile = new File(plugin.getDataFolder(), "messages.yml");
         abilitiesFile = new File(plugin.getDataFolder(), "abilities.yml");
 
         //create if not exist
         if (!configFile.exists()) plugin.saveResource("config.yml", false);
-        if (!messageFile.exists()) plugin.saveResource("messages.yml", false);
+        if (!messagesFile.exists()) plugin.saveResource("messages.yml", false);
         if (!abilitiesFile.exists()) plugin.saveResource("abilities.yml", false);
 
         //load it
         config = YamlConfiguration.loadConfiguration(configFile);
-        messages = YamlConfiguration.loadConfiguration(messageFile);
+        messages = YamlConfiguration.loadConfiguration(messagesFile);
         abilities = YamlConfiguration.loadConfiguration(abilitiesFile);
+
+        plugin.getLogger().info("Messages file loaded: " + messagesFile.exists());
     }
 
-    public FileConfiguration getConfig() {
-        return config;
-    }
-
-    public FileConfiguration getMessages() {
-        return messages;
-    }
-
-    public FileConfiguration getAbilities() {
-        return abilities;
-    }
+    public FileConfiguration getConfig() { return config; }
+    public FileConfiguration getMessages() { return messages; }
+    public FileConfiguration getAbilities() { return abilities; }
 
     public void saveConfig() {
         try {
@@ -57,7 +52,7 @@ public class ConfigManager {
 
     public void saveMessages() {
         try {
-            messages.save(messageFile);
+            messages.save(messagesFile);
         } catch (IOException e) {
             plugin.getLogger().log(Level.SEVERE, "Could not save messages", e);
         }
@@ -73,6 +68,7 @@ public class ConfigManager {
 
     public void reloadFiles() {
         loadFiles();
-        plugin.getLogger().info("Reloaded config");
+        plugin.getLogger().info("Configuration files have been reloaded.");
+        plugin.getLogger().info("config-reloaded message: " + messages.getString("messages.config-reloaded"));
     }
 }

@@ -5,6 +5,9 @@ api-version: 1.20
 author: Puk3p
 description: A plugin that allows players to select animal origins with special abilities.
 commands:
+  originmenu:
+    description: Open the origin selection menu.
+    usage: /originmenu
   reloadconfig:
     description: Reloads all configuration files.
     usage: /reloadconfig

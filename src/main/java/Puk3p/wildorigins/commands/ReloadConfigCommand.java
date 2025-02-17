@@ -16,13 +16,24 @@ public class ReloadConfigCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        plugin.getLogger().info("ReloadConfigCommand executed by " + sender.getName());
+
         if (!(sender instanceof Player) || sender.hasPermission("wildorigins.admin")) {
             plugin.getConfigManager().reloadFiles();
+            plugin.getLogger().info("Configs reloaded successfully!");
+
+            // Retrieve message from messages.yml
             String reloadMessage = plugin.getConfigManager().getMessages().getString("messages.config-reloaded", "&a[WildOrigins] Configuration reloaded!");
+            reloadMessage = ChatColor.translateAlternateColorCodes('&', reloadMessage);
+
+            sender.sendMessage(reloadMessage);
             return true;
         }
-        String noPermissionMessage = plugin.getConfigManager().getMessages().getString("messages.no-permission", "&cYou don't have permission to use this command!");
-        sender.sendMessage(noPermissionMessage.replace("&", "§"));
+
+        String noPermissionMessage = plugin.getConfigManager().getMessages().getString("messages.no-permission", "&cYou don't have permission!");
+        noPermissionMessage = ChatColor.translateAlternateColorCodes('&', noPermissionMessage);
+
+        sender.sendMessage(noPermissionMessage);
         return true;
     }
 }
