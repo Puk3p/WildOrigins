@@ -19,6 +19,10 @@ commands:
     description: Set a player's origin (admin only).
     usage: /setorigin <player> <origin>
     permission: wildorigins.admin
+  checkorigin:
+    description: Check a player's current origin.
+    usage: /checkorigin <player>
+    permission: wildorigins.admin
   resetorigin:
     description: Reset a player's origin to human.
     usage: /resetorigin <player>
