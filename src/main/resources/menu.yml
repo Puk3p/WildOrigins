@@ -1,0 +1,96 @@
+menu:
+  title: "&6Select Your Origin"
+  size: 27
+
+  items:
+    fill:
+      material: "GRAY_STAINED_GLASS_PANE"
+      display_name: "&r"
+      slots:
+        - 0-1
+
+    frog:
+      material: "LIME_DYE"
+      display_name: "&aFrog"
+      slot: 10
+      lore:
+        - "&7Abilities:"
+        - "&e- Jump Boost (temporary)"
+        - "&e- Water Breathing"
+        - ""
+        - "&aClick to select!"
+
+    ravager:
+      material: "IRON_AXE"
+      display_name: "&cRavager"
+      slot: 11
+      lore:
+        - "&7Abilities:"
+        - "&e- Strength 1"
+        - "&e- Resistance"
+        - ""
+        - "&aClick to select!"
+
+    sniffer:
+      material: "SNIFFER_EGG"
+      display_name: "&dSniffer"
+      slot: 12
+      lore:
+        - "&7Abilities:"
+        - "&e- Night Vision"
+        - "&e- Haste 1"
+        - ""
+        - "&aClick to select!"
+
+    chicken:
+      material: "FEATHER"
+      display_name: "&eChicken"
+      slot: 13
+      lore:
+        - "&7Abilities:"
+        - "&e- Feather Falling"
+        - "&e- Slow Falling"
+        - ""
+        - "&aClick to select!"
+
+    wolf:
+      material: "BONE"
+      display_name: "&fWolf"
+      slot: 14
+      lore:
+        - "&7Abilities:"
+        - "&e- Strength 1"
+        - "&e- Regeneration"
+        - ""
+        - "&aClick to select!"
+
+    bee:
+      material: "HONEYCOMB"
+      display_name: "&eBee"
+      slot: 15
+      lore:
+        - "&7Abilities:"
+        - "&e- Speed 2"
+        - "&e- Poison 1 (on attack: enemy poisoned for 5-10s)"
+        - "&e- Haste 1"
+        - ""
+        - "&aClick to select!"
+
+    cat:
+      material: "SALMON"
+      display_name: "&9Cat"
+      slot: 16
+      lore:
+        - "&7Abilities:"
+        - "&e- Night Vision"
+        - "&e- Speed 2"
+        - "&e- Jump Boost 1"
+        - ""
+        - "&aClick to select!"
+
+    close:
+      material: "BARRIER"
+      display_name: "&cClose Menu"
+      slot: 26
+      lore:
+        - "&7Click to close the menu."

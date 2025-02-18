@@ -10,8 +10,8 @@ import java.util.logging.Level;
 
 public class ConfigManager {
     private final WildOrigins plugin;
-    private FileConfiguration config, messages, abilities, players;
-    private File configFile, messagesFile, abilitiesFile, playersFile;
+    private FileConfiguration config, messages, abilities, players, menu;
+    private File configFile, messagesFile, abilitiesFile, playersFile, menuFile;
 
     public ConfigManager(WildOrigins plugin) {
         this.plugin = plugin;
@@ -25,18 +25,21 @@ public class ConfigManager {
         messagesFile = new File(plugin.getDataFolder(), "messages.yml");
         abilitiesFile = new File(plugin.getDataFolder(), "abilities.yml");
         playersFile = new File(plugin.getDataFolder(), "players.yml");
+        menuFile = new File(plugin.getDataFolder(), "menu.yml");
 
         //create if not exist
         if (!configFile.exists()) plugin.saveResource("config.yml", false);
         if (!messagesFile.exists()) plugin.saveResource("messages.yml", false);
         if (!abilitiesFile.exists()) plugin.saveResource("abilities.yml", false);
         if (!playersFile.exists()) plugin.saveResource("players.yml", false);
+        if (!menuFile.exists()) plugin.saveResource("menu.yml", false);
 
         //load it
         config = YamlConfiguration.loadConfiguration(configFile);
         messages = YamlConfiguration.loadConfiguration(messagesFile);
         abilities = YamlConfiguration.loadConfiguration(abilitiesFile);
         players = YamlConfiguration.loadConfiguration(playersFile);
+        menu = YamlConfiguration.loadConfiguration(menuFile);
 
         plugin.getLogger().info("Messages file loaded: " + messagesFile.exists());
     }
@@ -45,6 +48,7 @@ public class ConfigManager {
     public FileConfiguration getMessages() { return messages; }
     public FileConfiguration getAbilities() { return abilities; }
     public FileConfiguration getPlayers() { return players; }
+    public FileConfiguration getMenu() { return menu; }
 
     public void saveConfig() {
         try {
@@ -78,6 +82,13 @@ public class ConfigManager {
         }
     }
 
+    public void saveMenu() {
+        try {
+            menu.save(menuFile);
+        } catch (IOException e) {
+            plugin.getLogger().log(Level.SEVERE, "Could not save menu", e);
+        }
+    }
     public void reloadFiles() {
         loadFiles();
         plugin.getLogger().info("Configuration files have been reloaded.");
