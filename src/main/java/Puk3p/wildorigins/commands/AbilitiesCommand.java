@@ -26,7 +26,7 @@ public class AbilitiesCommand implements CommandExecutor {
         String playerUUID = player.getUniqueId().toString();
 
         //get origin
-        String origin = plugin.getConfigManager().getConfig().getString("players." + playerUUID + ".origin", "human");
+        String origin = plugin.getConfigManager().getPlayers().getString("players." + playerUUID + ".origin", "human");
         List<String> abilities = plugin.getConfigManager().getAbilities().getStringList("origins." + origin + ".abilities");
 
         if (abilities.isEmpty()) {

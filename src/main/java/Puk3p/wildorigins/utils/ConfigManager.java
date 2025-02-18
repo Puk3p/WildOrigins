@@ -10,8 +10,8 @@ import java.util.logging.Level;
 
 public class ConfigManager {
     private final WildOrigins plugin;
-    private FileConfiguration config, messages, abilities;
-    private File configFile, messagesFile, abilitiesFile;
+    private FileConfiguration config, messages, abilities, players;
+    private File configFile, messagesFile, abilitiesFile, playersFile;
 
     public ConfigManager(WildOrigins plugin) {
         this.plugin = plugin;
@@ -24,16 +24,19 @@ public class ConfigManager {
         configFile = new File(plugin.getDataFolder(), "config.yml");
         messagesFile = new File(plugin.getDataFolder(), "messages.yml");
         abilitiesFile = new File(plugin.getDataFolder(), "abilities.yml");
+        playersFile = new File(plugin.getDataFolder(), "players.yml");
 
         //create if not exist
         if (!configFile.exists()) plugin.saveResource("config.yml", false);
         if (!messagesFile.exists()) plugin.saveResource("messages.yml", false);
         if (!abilitiesFile.exists()) plugin.saveResource("abilities.yml", false);
+        if (!playersFile.exists()) plugin.saveResource("players.yml", false);
 
         //load it
         config = YamlConfiguration.loadConfiguration(configFile);
         messages = YamlConfiguration.loadConfiguration(messagesFile);
         abilities = YamlConfiguration.loadConfiguration(abilitiesFile);
+        players = YamlConfiguration.loadConfiguration(playersFile);
 
         plugin.getLogger().info("Messages file loaded: " + messagesFile.exists());
     }
@@ -41,6 +44,7 @@ public class ConfigManager {
     public FileConfiguration getConfig() { return config; }
     public FileConfiguration getMessages() { return messages; }
     public FileConfiguration getAbilities() { return abilities; }
+    public FileConfiguration getPlayers() { return players; }
 
     public void saveConfig() {
         try {
@@ -63,6 +67,14 @@ public class ConfigManager {
             abilities.save(abilitiesFile);
         } catch (IOException e) {
             plugin.getLogger().log(Level.SEVERE, "Could not save abilities", e);
+        }
+    }
+
+    public void savePlayers() {
+        try {
+            players.save(playersFile);
+        } catch (IOException e) {
+            plugin.getLogger().log(Level.SEVERE, "Could not save players", e);
         }
     }
 

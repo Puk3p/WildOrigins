@@ -66,8 +66,8 @@ public class OriginMenu implements Listener {
             String selectedOrigin = ChatColor.stripColor(clickedItem.getItemMeta().getDisplayName());
 
             //saving players to config
-            plugin.getConfigManager().getConfig().set("players." + player.getUniqueId() + ".origin", selectedOrigin.toLowerCase());
-            plugin.getConfigManager().saveConfig();
+            plugin.getConfigManager().getPlayers().set("players." + player.getUniqueId() + ".origin", selectedOrigin.toLowerCase());
+            plugin.getConfigManager().savePlayers();
 
             player.sendMessage(ChatColor.GOLD + "You selected " + selectedOrigin + "!");
             player.closeInventory();

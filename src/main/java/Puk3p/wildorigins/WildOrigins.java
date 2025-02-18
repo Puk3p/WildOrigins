@@ -3,7 +3,6 @@ package Puk3p.wildorigins;
 import Puk3p.wildorigins.commands.AbilitiesCommand;
 import Puk3p.wildorigins.commands.OriginMenuCommand;
 import Puk3p.wildorigins.commands.ReloadConfigCommand;
-import Puk3p.wildorigins.menus.OriginMenu;
 import Puk3p.wildorigins.utils.ConfigManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
