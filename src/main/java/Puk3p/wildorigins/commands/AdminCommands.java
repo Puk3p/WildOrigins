@@ -1,6 +1,7 @@
 package Puk3p.wildorigins.commands;
 
 import Puk3p.wildorigins.WildOrigins;
+import Puk3p.wildorigins.listeners.OriginEffectsListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -55,6 +56,13 @@ public class AdminCommands implements CommandExecutor, TabCompleter {
 
                 sender.sendMessage(ChatColor.GREEN + "You have set " + ChatColor.AQUA + target.getName() + "'s" + ChatColor.GREEN + " origin to " + ChatColor.GOLD + origin);
                 target.sendMessage(ChatColor.AQUA + "Your origin has been set to " + ChatColor.GOLD + origin + ChatColor.AQUA + " by an admin!");
+
+                //aply eff
+                plugin.getLogger().info("Applying effects for " + target.getName() + " after changing to " + origin);
+                plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+                    OriginEffectsListener effectsListener = new OriginEffectsListener(plugin);
+                    effectsListener.applyEffects(target);
+                }, 2L);
                 return true;
 
             case "resetorigin":

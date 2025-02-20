@@ -11,6 +11,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class OriginEffectsListener implements Listener {
@@ -37,26 +38,42 @@ public class OriginEffectsListener implements Listener {
         String origin = plugin.getConfigManager().getPlayers().getString("players." + playerUUID + ".origin",
                 plugin.getConfigManager().getConfig().getString("settings.default-origin", "human"));
 
+        plugin.getLogger().info("[DEBUG] Applying effects for " + player.getName() + " (Origin: " + origin + ")");
+
+
         // rmv existing potion eff
         player.getActivePotionEffects().forEach(effect -> player.removePotionEffect(effect.getType()));
 
         //eff from cfg
         ConfigurationSection originConfig  = plugin.getConfigManager().getConfig().getConfigurationSection("origins." + origin);
-        if (originConfig == null) return;
+        if (originConfig == null) {
+            plugin.getLogger().warning("[DEBUG] No effects found for origin: " + origin);
+            return;
+        }
 
-        List<?> effects = originConfig.getList("effects");
-        if (effects == null) return;
+        List<Map<?, ?>> effects = originConfig.getMapList("effects"); //map from list
+        if (effects == null || effects.isEmpty()) {
+            plugin.getLogger().warning("[DEBUG] Effects list is missing or empty for origin: " + origin);
+            return;
+        }
 
-        for (Object effectObj : effects) {
-            if (!(effectObj instanceof ConfigurationSection effectSection)) continue;
 
-            String type = effectSection.getString("type");
-            int amplifier = effectSection.getInt("amplifier", 0);
-            int duration = effectSection.getInt("duration", 999999); //999999 = inf
+        for (Map<?, ?> effectMap : effects) {
+            String type = (String) effectMap.get("type");
+            int amplifier = (effectMap.containsKey("amplifier")) ? (int) effectMap.get("amplifier") : 0;
+            int duration = (effectMap.containsKey("duration")) ? (int) effectMap.get("duration") : 999999;
+
+            if (type == null) {
+                plugin.getLogger().warning("[DEBUG] Missing 'type' field in effects for " + origin);
+                continue;
+            }
 
             PotionEffectType potionType = PotionEffectType.getByName(type.toUpperCase());
             if (potionType != null) {
                 player.addPotionEffect(new PotionEffect(potionType, duration, amplifier, false, false));
+                plugin.getLogger().info("[DEBUG] Applied effect: " + type + " (Amplifier: " + amplifier + ", Duration: " + duration + ")");
+            } else {
+                plugin.getLogger().warning("[DEBUG] Invalid potion effect type: " + type);
             }
         }
     }

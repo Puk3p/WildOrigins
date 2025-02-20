@@ -30,7 +30,8 @@ public class WildOrigins extends JavaPlugin {
         getCommand("checkorigin").setExecutor(adminCommands);
 
         OriginMenu originMenu = new OriginMenu(this);
-        Bukkit.getPluginManager().registerEvents(new OriginEffectsListener(this), this);
+        OriginEffectsListener originEffectsListener = new OriginEffectsListener(this);
+        Bukkit.getPluginManager().registerEvents(originEffectsListener, this);
         Bukkit.getPluginManager().registerEvents(originMenu, this);
 
         getLogger().info("WildOrigins a fost activat!");
