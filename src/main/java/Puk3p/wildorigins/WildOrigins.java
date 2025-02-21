@@ -6,6 +6,7 @@ import Puk3p.wildorigins.commands.OriginMenuCommand;
 import Puk3p.wildorigins.commands.ReloadConfigCommand;
 import Puk3p.wildorigins.listeners.OriginEffectsListener;
 import Puk3p.wildorigins.placeholders.OriginPlaceholder;
+import Puk3p.wildorigins.specialabilities.ChickenAbility;
 import Puk3p.wildorigins.specialabilities.FrogAbility;
 import Puk3p.wildorigins.utils.ConfigManager;
 import org.bukkit.Bukkit;
@@ -21,14 +22,15 @@ public class WildOrigins extends JavaPlugin {
         configManager = new ConfigManager(this);
         AdminCommands adminCommands = new AdminCommands(this);
         Bukkit.getPluginManager().registerEvents(new FrogAbility(this), this);
+        Bukkit.getPluginManager().registerEvents(new ChickenAbility(this), this);
 
-        // Register PlaceholderAPI support
+        // PAPI suport
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new OriginPlaceholder(this).register();
             getLogger().info("PlaceholderAPI detected! Registering placeholders...");
         }
 
-        getCommand("reloadconfig").setExecutor(adminCommands);
+        getCommand("reloadconfig").setExecutor(new ReloadConfigCommand(this));
         getCommand("abilities").setExecutor(adminCommands);
         getCommand("originmenu").setExecutor(new OriginMenuCommand(this));
 
