@@ -38,11 +38,11 @@ public class OriginEffectsListener implements Listener {
         String origin = plugin.getConfigManager().getPlayers().getString("players." + playerUUID + ".origin",
                 plugin.getConfigManager().getConfig().getString("settings.default-origin", "human"));
 
-        plugin.getLogger().info("[DEBUG] Applying effects for " + player.getName() + " (Origin: " + origin + ")");
+        //plugin.getLogger().info("[DEBUG] Applying effects for " + player.getName() + " (Origin: " + origin + ")");
 
 
         // rmv existing potion eff
-        player.getActivePotionEffects().forEach(effect -> player.removePotionEffect(effect.getType()));
+        //player.getActivePotionEffects().forEach(effect -> player.removePotionEffect(effect.getType()));
 
         //eff from cfg
         ConfigurationSection originConfig  = plugin.getConfigManager().getConfig().getConfigurationSection("origins." + origin);
