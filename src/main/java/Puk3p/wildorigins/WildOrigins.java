@@ -5,10 +5,7 @@ import Puk3p.wildorigins.commands.OriginMenuCommand;
 import Puk3p.wildorigins.commands.ReloadConfigCommand;
 import Puk3p.wildorigins.listeners.OriginEffectsListener;
 import Puk3p.wildorigins.placeholders.OriginPlaceholder;
-import Puk3p.wildorigins.specialabilities.BeeAbility;
-import Puk3p.wildorigins.specialabilities.ChickenAbility;
-import Puk3p.wildorigins.specialabilities.FrogAbility;
-import Puk3p.wildorigins.specialabilities.SnifferAbility;
+import Puk3p.wildorigins.specialabilities.*;
 import Puk3p.wildorigins.utils.ConfigManager;
 import Puk3p.wildorigins.menus.OriginMenu;
 import org.bukkit.Bukkit;
@@ -75,6 +72,7 @@ public class WildOrigins extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new ChickenAbility(this), this);
         Bukkit.getPluginManager().registerEvents(new BeeAbility(this), this);
         Bukkit.getPluginManager().registerEvents(new SnifferAbility(this), this);
+        Bukkit.getPluginManager().registerEvents(new RavagerAbility(this), this);
 
 
         OriginMenu originMenu = new OriginMenu(this);
