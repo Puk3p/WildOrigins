@@ -8,6 +8,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import java.util.*;
 
 public class SnifferAbility implements Listener {
@@ -43,7 +45,7 @@ public class SnifferAbility implements Listener {
             }
         }
 
-        // plants nearby checking
+        //plants checking
         List<Block> foundPlants = new ArrayList<>();
         int radius = 5;
         for (int x = -radius; x <= radius; x++) {
@@ -57,16 +59,16 @@ public class SnifferAbility implements Listener {
             }
         }
 
-        //particles showing
+        // particles
         if (!foundPlants.isEmpty()) {
             for (Block plant : foundPlants) {
-                player.spawnParticle(Particle.VILLAGER_HAPPY, plant.getLocation().add(0.5, 0.5, 0.5), 10);
+                spawnPersistentParticles(player, plant.getLocation().add(0.5, 0.5, 0.5));
             }
             player.playSound(player.getLocation(), Sound.ENTITY_SNIFFER_HAPPY, 1.0f, 1.0f);
             player.sendMessage(ChatColor.GREEN + "Your Sniffer instincts detect plants nearby!");
 
-            // chance to get a rare seed
-            if (Math.random() < 0.3) { // 30% chance
+
+            if (Math.random() < 0.3) {
                 ItemStack seed = new ItemStack(getRandomSeed(), 1);
                 player.getInventory().addItem(seed);
                 player.sendMessage(ChatColor.GOLD + "You found a hidden seed!");
@@ -75,8 +77,26 @@ public class SnifferAbility implements Listener {
             player.sendMessage(ChatColor.GRAY + "You sense no plants nearby...");
         }
 
+
         cooldowns.put(playerUUID, System.currentTimeMillis());
         bossBar.startCooldown(player, cooldownTime);
+    }
+
+
+    private void spawnPersistentParticles(Player player, Location location) {
+        new BukkitRunnable() {
+            int duration = 5 * 20;
+
+            @Override
+            public void run() {
+                if (duration <= 0) {
+                    cancel();
+                    return;
+                }
+                player.spawnParticle(Particle.HEART, location, 5);
+                duration -= 10;
+            }
+        }.runTaskTimer(plugin, 0L, 10L);
     }
 
     private Material getRandomSeed() {

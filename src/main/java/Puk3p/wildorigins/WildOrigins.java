@@ -73,6 +73,8 @@ public class WildOrigins extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new BeeAbility(this), this);
         Bukkit.getPluginManager().registerEvents(new SnifferAbility(this), this);
         Bukkit.getPluginManager().registerEvents(new RavagerAbility(this), this);
+        Bukkit.getPluginManager().registerEvents(new WolfAbility(this), this);
+        Bukkit.getPluginManager().registerEvents(new CatAbility(this), this);
 
 
         OriginMenu originMenu = new OriginMenu(this);
