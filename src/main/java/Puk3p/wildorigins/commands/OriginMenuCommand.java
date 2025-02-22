@@ -10,9 +10,11 @@ import org.bukkit.entity.Player;
 
 public class OriginMenuCommand implements CommandExecutor {
     private final WildOrigins plugin;
+    private final OriginMenu originMenu;
 
     public OriginMenuCommand(WildOrigins plugin) {
         this.plugin = plugin;
+        this.originMenu = new OriginMenu(plugin);
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -21,7 +23,12 @@ public class OriginMenuCommand implements CommandExecutor {
             return true;
         }
         Player player = (Player) sender;
-        new OriginMenu(plugin).openMenu(player);
+        boolean useDefaultMenu = plugin.getConfigManager().getConfig().getBoolean("settings.use-default-menu", true);
+        if (!useDefaultMenu) {
+            player.sendMessage(ChatColor.RED + "The default menu is disabled! Use your own setup.");
+            return true;
+        }
+        originMenu.openMenu(player);
         return true;
     }
 }

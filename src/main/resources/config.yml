@@ -2,6 +2,7 @@ settings:
   default-origin: human  # Default origin when resetting
   ability-cooldown: 30   # Global cooldown for abilities (seconds)
   use-placeholderapi: true  # Enable PlaceholderAPI support
+  use-default-menu: true # If true, use plugin's menu. If false, disable it.
 
 origins:
   frog:

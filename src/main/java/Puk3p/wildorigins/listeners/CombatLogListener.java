@@ -1,4 +1,6 @@
 package Puk3p.wildorigins.listeners;
 
-public class CombatLogListener {
+import org.bukkit.event.Listener;
+
+public class CombatLogListener implements Listener {
 }

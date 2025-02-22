@@ -22,7 +22,7 @@ public class ReloadConfigCommand implements CommandExecutor {
             plugin.getConfigManager().reloadFiles();
             plugin.getLogger().info("Configs reloaded successfully!");
 
-            // Retrieve message from messages.yml
+            // msg for msg.yml
             String reloadMessage = plugin.getConfigManager().getMessages().getString("messages.config-reloaded", "&a[WildOrigins] Configuration reloaded!");
             reloadMessage = ChatColor.translateAlternateColorCodes('&', reloadMessage);
 
