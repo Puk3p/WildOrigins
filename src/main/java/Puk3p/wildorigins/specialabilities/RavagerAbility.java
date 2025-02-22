@@ -48,25 +48,24 @@ public class RavagerAbility implements Listener {
         }
 
         Vector direction = player.getLocation().getDirection().multiply(2.5);
-        direction.setY(0.5); // Small jump effect
+        direction.setY(0.5); //small jmp eff
         player.setVelocity(direction);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 2, false, false, false)); // 1s Speed boost
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 2, false, false, false));
 
-        // Play sound & particles
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_RAVAGER_ROAR, 1.5f, 1.0f);
         player.getWorld().spawnParticle(Particle.CLOUD, player.getLocation(), 20, 0.5, 0.5, 0.5, 0.1);
         player.sendMessage(ChatColor.DARK_RED + "You charge forward!");
 
-        // Damage entities in front
+
         List<Entity> nearbyEntities = player.getNearbyEntities(3, 1, 3);
         for (Entity entity : nearbyEntities) {
             if (entity instanceof LivingEntity && entity != player) {
-                ((LivingEntity) entity).damage(6.0, player); // 3 Hearts Damage
+                ((LivingEntity) entity).damage(6.0, player); //3 h damage
                 entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_GENERIC_HURT, 1.0f, 1.0f);
             }
         }
 
-        // Start cooldown
+        //start cd
         cooldowns.put(playerUUID, System.currentTimeMillis());
         bossBar.startCooldown(player, cooldownTime);
     }
