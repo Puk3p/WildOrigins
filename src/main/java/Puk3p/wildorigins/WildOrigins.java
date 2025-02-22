@@ -9,6 +9,7 @@ import Puk3p.wildorigins.placeholders.OriginPlaceholder;
 import Puk3p.wildorigins.specialabilities.BeeAbility;
 import Puk3p.wildorigins.specialabilities.ChickenAbility;
 import Puk3p.wildorigins.specialabilities.FrogAbility;
+import Puk3p.wildorigins.specialabilities.SnifferAbility;
 import Puk3p.wildorigins.utils.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,6 +26,7 @@ public class WildOrigins extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new FrogAbility(this), this);
         Bukkit.getPluginManager().registerEvents(new ChickenAbility(this), this);
         Bukkit.getPluginManager().registerEvents(new BeeAbility(this), this);
+        Bukkit.getPluginManager().registerEvents(new SnifferAbility(this), this);
 
         // PAPI suport
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {

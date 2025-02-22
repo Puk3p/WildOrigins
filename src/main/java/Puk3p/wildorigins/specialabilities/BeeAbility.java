@@ -14,6 +14,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -27,9 +28,13 @@ public class BeeAbility implements Listener {
             Material.WITHER_ROSE, Material.SUNFLOWER, Material.LILAC, Material.ROSE_BUSH, Material.PEONY
     ));
 
+    private final HashMap<UUID, Long> cooldowns = new HashMap<>();
     private final HashSet<UUID> buffedPlayers = new HashSet<>();
+    private final CooldownBossBar bossBar;
+
     public BeeAbility(WildOrigins plugin) {
         this.plugin = plugin;
+        this.bossBar = new CooldownBossBar(plugin);
     }
 
     @EventHandler
@@ -40,6 +45,15 @@ public class BeeAbility implements Listener {
 
         if (!origin.equalsIgnoreCase("bee")) return;
 
+        int cooldownTime = plugin.getConfigManager().getConfig().getInt("settings.ability-cooldown", 10);
+
+        if (cooldowns.containsKey(playerUUID)) {
+            long lastUse = cooldowns.get(playerUUID);
+            if (System.currentTimeMillis() - lastUse < cooldownTime * 1000L) {
+                return;
+            }
+        }
+
         boolean nearFlower = isNearFlower(player);
 
         if (nearFlower) {
@@ -49,6 +63,10 @@ public class BeeAbility implements Listener {
                 player.getWorld().spawnParticle(Particle.HEART, player.getLocation().add(0, 1, 0), 5);
                 player.playSound(player.getLocation(), Sound.ENTITY_BEE_POLLINATE, 1.0f, 1.0f);
                 player.sendMessage(ChatColor.GOLD + "You feel energized by the flowers!");
+
+
+                cooldowns.put(playerUUID, System.currentTimeMillis());
+                bossBar.startCooldown(player, cooldownTime);
             }
         } else {
             if (buffedPlayers.contains(playerUUID)) {
@@ -60,7 +78,7 @@ public class BeeAbility implements Listener {
     }
 
     private boolean isNearFlower(Player player) {
-        int radius = 2; //radius ariund the player
+        int radius = 2;
 
         for (int x = -radius; x <= radius; x++) {
             for (int y = -1; y <= 1; y++) {
